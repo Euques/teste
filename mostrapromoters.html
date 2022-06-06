@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="pt_BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listar Promoters</title>
+
+    
+    <style>
+   
+
+
+
+
+    </style>
+
+</head>
+
+<body>
+    <p>Teste do bagulho</p>
+    
+    
+   
+   
+
+
+
+
+
+
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-storage.js"></script>
+
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+
+    <script>
+
+        var firebaseConfig = {
+            apiKey: "AIzaSyCLEyAd_4-2n2ID0xTjwS1ouip9G9C6JDs",
+            authDomain: "blacknight-600de.firebaseapp.com",
+            databaseURL: "https://blacknight-600de.firebaseio.com",
+            projectId: "blacknight-600de",
+            storageBucket: "blacknight-600de.appspot.com",
+            messagingSenderId: "588926432348",
+            appId: "1:588926432348:web:47b2b4a1b421d4b2a0e299",
+            measurementId: "G-559VYPVJ5Q"
+
+        };
+
+        // Initialize Firebase
+
+        firebase.initializeApp(firebaseConfig);
+
+    
+
+                
+
+
+    </script>
+
+
+<style>
+
+.divFoto{
+width: 70px;
+    
+
+}
+.foto {
+            
+    width: 70px;
+    height: auto;
+    border-radius: 50px;
+}
+.lista {
+    display: block;
+    background-color: blue;
+    border: 1px;
+    border-color: blue;
+    border: 1px solid blue;
+}
+
+.promoter {
+
+    display: flex;
+    align-content: stretch;
+    flex-direction: row;
+    align-items: center;
+
+    
+    background-color: aquamarine;
+    border-radius: 10px;
+    padding: 10px;
+    margin: 5px;
+
+    border: 1px solid blue;
+
+}
+
+.conteiner {
+    border: 1px;
+    
+    border: 1px solid rgb(0, 255, 51);
+
+}
+
+.conteudo {
+    width: 60%;
+    position: relative;
+    display: inline;
+    padding: 10px;
+    margin: 5px;
+
+    
+}
+
+.url{
+    
+    width: 20%;
+    position: relative;
+    float: right;
+    display: inline;
+    padding: 10px;
+    margin: 5px;
+    border: 1px solid red;
+    text-align: right;
+}
+
+
+.mostraRegras{
+
+}
+
+ul{
+
+
+border: 1px solid red;
+padding: 0%;
+    
+}
+
+#mostraRegras > ul {
+list-style-type: none;
+padding: 0;
+}
+
+#mostraRegras > li > span {
+vertical-align: sub;
+
+}
+
+.pApelido{
+    font-size: 16px;
+    margin: 2px;
+}
+
+.pNome{
+    font-size: 16px;
+    margin: 2px;
+}
+
+.pBtn {
+    border: 1px solid red;
+    border-radius: 20px;
+}
+
+#mostraRegras > li {
+
+display: flex;
+color: rgb(255, 255, 255);
+
+padding: 10px;
+font-size: 14px;
+font-family: 'Roboto Condensed';
+font-weight: 400;
+text-align: left;
+background: #0008ff50;
+border-radius: 10px;
+
+margin: 3px;
+align-items: center;
+line-height: normal;
+}
+    </style>
+
+
+<p id="GFG"></p>
+<ul id="mostraRegras"></ul>
+
+<div id="lista"></div>
+
+<script>
+
+//Mostra Regras
+
+var mostraRegras = document.getElementById('mostraRegras')
+    
+    var dadosMostraRegras = ""
+   
+
+    firebase.database().ref('promo/')
+        .orderByChild('ativo').equalTo(true)
+        .on('child_added', (snapshot) =>{    
+  
+        var resultado = snapshot.val()
+        var chave = snapshot.key
+        
+
+
+        dadosMostraRegras = ` 
+                
+        <li class="mostraRegras"><div class="divFoto"><img src= ${resultado.foto} class="foto" ></div> <div class="conteudo"> <p class="pApelido"><b>${resultado.apelido.toUpperCase()}</b></p> <p class="pNome"> ${resultado.nome}</p> </div>
+           <hr> <div class="url"><button class="pBtn" onclick="window.location.href='https://hotel.bknt.club/?p=${chave}','_blank'">Ver site</button> <button class="pBtn" onclick="window.location.href='https://hotel.bknt.club/?p=${chave}#promoter582','_blank'">Ver Saldo</button></div>
+            </li>` + dadosMostraRegras
+        
+
+        mostraRegras.innerHTML = dadosMostraRegras
+ 
+// conta numeros de lista   
+let count = window.document.getElementById("mostraRegras").childElementCount;
+window.document.getElementById("GFG").innerHTML = `Essa lista tem ${count} Promoters ativos`;
+
+        
+
+})
+
+
+
+</script>
+
+
+
+</body>
+
+
+
+</html>
