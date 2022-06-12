@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="pt_BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listar geral</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@200;400&display=swap" rel="stylesheet">
+
+    <style>
+
+
+
+
+
+    </style>
+
+</head>
+
+<body>
+    <p>Teste do bagulho</p>
+
+
+
+
+
+
+
+
+
+
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-storage.js"></script>
+
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+
+    <script>
+
+        var firebaseConfig = {
+            apiKey: "AIzaSyCLEyAd_4-2n2ID0xTjwS1ouip9G9C6JDs",
+            authDomain: "blacknight-600de.firebaseapp.com",
+            databaseURL: "https://blacknight-600de.firebaseio.com",
+            projectId: "blacknight-600de",
+            storageBucket: "blacknight-600de.appspot.com",
+            messagingSenderId: "588926432348",
+            appId: "1:588926432348:web:47b2b4a1b421d4b2a0e299",
+            measurementId: "G-559VYPVJ5Q"
+
+        };
+
+        // Initialize Firebase
+
+        firebase.initializeApp(firebaseConfig);
+
+
+
+
+
+
+    </script>
+
+
+    <style>
+        body {
+
+            background-color: #000;
+
+        }
+
+        .divFoto {
+            width: 70px;
+
+
+        }
+
+        .foto {
+
+            width: 70px;
+            height: auto;
+            border-radius: 50px;
+        }
+
+        .lista {
+            display: block;
+            background-color: blue;
+            border: 1px;
+            border-color: blue;
+            border: 1px solid blue;
+        }
+
+        .promoter {
+
+            display: flex;
+            align-content: stretch;
+            flex-direction: row;
+            align-items: center;
+
+
+            background-color: aquamarine;
+            border-radius: 10px;
+            padding: 10px;
+            margin: 5px;
+
+            border: 1px solid blue;
+
+        }
+
+        .conteiner {
+            border: 1px;
+
+            border: 1px solid rgb(0, 255, 51);
+
+        }
+
+        .conteudo {
+            width: 60%;
+            position: relative;
+            display: inline;
+            padding: 10px;
+            margin: 5px;
+
+
+        }
+
+        .url {
+
+            width: 20%;
+            position: relative;
+            float: right;
+            display: inline;
+            padding: 10px;
+            margin: 5px;
+            border: 1px solid red;
+            text-align: right;
+        }
+
+
+        .mostraRegras {}
+
+        ul {
+
+
+
+            padding: 0%;
+
+        }
+
+        #mostraRegras>ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        #mostraRegras>li>span {
+            vertical-align: sub;
+
+        }
+
+        .pApelido {
+            color: rgba(255, 255, 255, 0.706);
+            font-size: 16px;
+            margin: 2px;
+        }
+
+        p {
+
+            color: rgba(255, 255, 255, 0.44);
+            font-size: 14px;
+            margin: 2px;
+        }
+
+        .pNome {
+
+            color: rgba(255, 255, 255, 0.44);
+            font-size: 14px;
+            margin: 2px;
+        }
+
+        .pConvidado {
+            color: rgba(62, 155, 255, 0.743);
+            font-size: 16px;
+            margin: 2px;
+        }
+
+        .pSaldo {
+            font-size: 16px;
+            margin: 2px;
+            color: rgba(62, 255, 117, 0.567);
+        }
+
+        .pBtn {
+            border: 1px solid red;
+            border-radius: 20px;
+        }
+
+        #mostraRegras>li {
+
+            display: flex;
+            color: rgba(255, 255, 255, 0.743);
+
+            padding: 0px 10px;
+            font-size: 14px;
+            font-family: 'Roboto Condensed';
+            font-weight: 200;
+            text-align: left;
+            background:rgba(40, 40, 40, 0.743);
+            border-radius: 10px;
+
+            margin: 5px;
+            align-items: center;
+            line-height: normal;
+        }
+    </style>
+
+
+    <p id="contaPromoter"></p>
+    <ul id="mostraRegras"></ul>
+
+    <div id="lista"></div>
+
+    <script>
+
+
+        //Mostra lista ausentes promoter
+
+        //${diaEventoBd}
+        //`${apelido}`
+
+
+
+
+
+
+
+
+        //----Fim mostra lista promoter-------
+
+
+        //Mostra Regras
+
+        var mostraRegras = document.getElementById('mostraRegras')
+
+        var dadosMostraRegras = ""
+
+
+        firebase.database().ref('promo/')
+            .orderByChild('ativo')
+            //.equalTo(true)
+            .on('child_added', (snapshot) => {
+
+                var resultado = snapshot.val()
+                var chave = snapshot.key
+
+
+                firebase.database().ref(`/festas/QUA15JUN22H2022/listas/${resultado.apelido}`).orderByChild('nome').on('value', (nome) => {
+
+                    let resultado2 = nome.val()
+                    let chave2 = nome.key
+
+                    let conta = nome.numChildren()
+
+
+                    firebase.database().ref('/festas/QUA15JUN22H2022/listas/geral/ausentes').orderByChild('promoter')
+                        .equalTo(`${resultado.apelido}`).on('value', (total) => {
+
+                            let convidados = total.val()
+                            let chave3 = total.key
+
+                            let conta2 = total.numChildren()
+
+
+                            var atual = resultado.comicao * conta;
+
+                            //com R$
+                            var f = atual.toLocaleString('pt-br', { minimumFractionDigits: 2 });
+
+
+
+                            dadosMostraRegras = ` 
+                
+        <li class="mostraRegras"><div class="divFoto"><img src= ${resultado.foto} class="foto" ></div> <div class="conteudo"> <p class="pApelido"><b>${resultado.apelido.toUpperCase()}</b></p> <p class="pNome"> ${resultado.nome} </p> <p class="pConvidado"> <b>${conta}</b> /${conta2} convidados</p><p class="pSaldo"> Saldo: R$<b> ${f} </b></p> </div>
+            <div class="url"><button class="pBtn" onclick="window.location.href='https://hotel.bknt.club/?p=${chave}','_blank'">Ver site</button> <button class="pBtn" onclick="window.location.href='https://hotel.bknt.club/?p=${chave}#promoter582','_blank'">Ver Saldo</button></div>
+            </li>` + dadosMostraRegras
+
+
+                            mostraRegras.innerHTML = dadosMostraRegras
+
+                            // conta numeros de lista   
+                            let count = window.document.getElementById("mostraRegras").childElementCount;
+                            window.document.getElementById("contaPromoter").innerHTML = `Essa lista tem ${count} Promoters ativos`;
+
+
+                        })
+                })
+            })
+
+
+
+    </script>
+
+
+
+</body>
+
+
+
+</html>
