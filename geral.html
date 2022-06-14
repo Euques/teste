@@ -17,23 +17,11 @@
     <style>
 
 
-
-
-
     </style>
 
 </head>
 
 <body>
-
-
-
-
-
-
-
-
-
 
 
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
@@ -60,11 +48,6 @@
         // Initialize Firebase
 
         firebase.initializeApp(firebaseConfig);
-
-
-
-
-
 
     </script>
 
@@ -149,9 +132,12 @@
 
         .mostraRegras {}
 
+        #contaPromoter{
+            text-align: center;
+            align-content: center;
+        }
+
         ul {
-
-
 
             padding: 0%;
 
@@ -169,8 +155,9 @@
 
         .pApelido {
             color: rgba(255, 255, 255, 0.706);
-            font-size: 16px;
+            font-size: 14px;
             margin: 2px;
+            font-weight: 100;
         }
 
         p {
@@ -294,6 +281,17 @@
                 var resultado = snapshot.val()
                 var chave = snapshot.key
 
+                let ativado = ""
+
+                if (resultado.ativo == true) {
+                    ativado = ""
+                    
+
+                } else {
+                    ativado = "⭕"
+                    
+                }
+
 
                 firebase.database()
                     .ref(`/festas/QUA15JUN22H2022/listas/${resultado.apelido}`)
@@ -303,6 +301,8 @@
                         let resultado2 = nome.val()
                         let chave2 = nome.key
                         let conta = nome.numChildren()
+
+
 
 
                         firebase.database()
@@ -325,7 +325,7 @@
 
                                 dadosMostraRegras = ` 
                 
-        <li class="mostraRegras"><div class="divFoto"><img src= ${resultado.foto} class="foto" ></div> <div class="conteudo"> <p class="pApelido"><b>${resultado.apelido.toUpperCase()}</b></p> <p class="pNome"> ${resultado.nome} </p> <p class="pConvidado"> <b>${conta}</b> de ${conta2} convidados</p><p class="pSaldo"> Saldo: R$<b> ${f} </b></p> </div>
+        <li class="mostraRegras"><div class="divFoto"><img src= ${resultado.foto} class="foto" ></div> <div class="conteudo"> <p class="pApelido"><b>  ${resultado.apelido.toUpperCase()} </b>${ativado}</p> <p class="pNome"> ${resultado.nome} </p> <p class="pConvidado"> <b>${conta}</b> de ${conta2} convidados</p><p class="pSaldo"> Saldo: R$<b> ${f} </b></p> </div>
             <div class="url"><a href="https://hotel.bknt.club/?p=${chave}" class="pBtn"><i class="material-symbols-rounded">
 format_list_numbered
 </i></a> <a href="https://hotel.bknt.club/?p=${chave}#promoter582" class="pBtn"><i class="material-symbols-rounded">
