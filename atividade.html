@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Visão Geral</title>
+    <title>Tempo Real</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -60,15 +60,15 @@
         }
 
         .divFoto {
-            width: 90px;
+            width: 60px;
 
 
         }
 
         .foto {
 
-            width: 80px;
-            height: 80px;
+            width: 50px;
+            height: 50px;
             border-radius: 50px;
             border: rgb(55, 55, 55) solid 5px;
             background-color: rgba(255, 255, 255, 0.706);
@@ -185,9 +185,11 @@
         }
 
         .pSaldo {
-            font-size: 16px;
-            margin: 2px;
+            
+            font-size: 20px;
+            margin: px;
             color: rgba(62, 255, 117, 0.567);
+            
         }
 
         .pBtn {
@@ -251,6 +253,11 @@
     <script>
 
 
+//pega id do promoter
+const { search } = window.location
+const params = new URLSearchParams(search)
+const pegaA = params.get('a')
+
         //Mostra lista ausentes promoter
 
         //${diaEventoBd}
@@ -258,10 +265,7 @@
 
 
 
-//pega id do promoter
-const { search } = window.location
-const params = new URLSearchParams(search)
-const pegaA = params.get('a')
+
 
 
 
@@ -328,12 +332,8 @@ const pegaA = params.get('a')
 
                                 dadosMostraRegras = ` 
                 
-        <li class="mostraRegras"><div class="divFoto"><img src= ${resultado.foto} class="foto" ></div> <div class="conteudo"> <p class="pApelido"><b>  ${resultado.apelido.toUpperCase()} </b>${ativado}</p> <p class="pNome"> ${resultado.nome} </p> <p class="pConvidado"> <b>${conta}</b> de ${conta2} convidados</p><p class="pSaldo"> Saldo: R$<b> ${f} </b></p> </div>
-            <div class="url"><a href="https://hotel.bknt.club/?p=${chave}" target="_blank" class="pBtn"><i class="material-symbols-rounded">
-format_list_numbered
-</i></a> <a href="https://hotel.bknt.club/?p=${chave}#promoter582" target="_blank" class="pBtn"><i class="material-symbols-rounded">
-    paid
-</i></a></div>
+        <li class="mostraRegras"><div class="divFoto"><img src= ${resultado.foto} class="foto" ></div> <div class="conteudo"> <p class="pApelido"><b>  ${resultado.apelido.toUpperCase()} </b>${ativado}</p> <p class="pConvidado"> <b>${conta}</b> check-in / ${conta2} convidados</p></p> </div>
+            <div class="url"><p class="pNome">R$</p><p class="pSaldo">  ${f} </div>   
             </li>` + dadosMostraRegras
 
 
