@@ -266,6 +266,11 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/4.2.0/mdb.min.js"></script>
 
     <script>
+        
+        
+        const { search } = window.location
+const params = new URLSearchParams(search)
+const pegaA = params.get('a')
 
 
         $(document).ready(function () {
@@ -350,7 +355,7 @@
 
                         firebase
                             .database()
-                            .ref(`festas/seg01jan2019/bday`)
+                            .ref(`festas/${pegaA}/bday`)
                             .push(
 
                                 {
@@ -382,7 +387,7 @@
                                         var whats = document.getElementById('whats').value
 
                                         firebase.database()
-                                            .ref(`festas/seg01jan2019/bday/${snap.key}`)
+                                            .ref(`festas/${pegaA}/bday/${snap.key}`)
                                             .set(
 
                                                 {
