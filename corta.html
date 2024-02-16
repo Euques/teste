@@ -1,3 +1,6 @@
+
+
+
 <!DOCTYPE html>
 <html lang="pt_BR">
 
@@ -88,6 +91,7 @@
 
         .rounded {
             border-radius: 50% !important;
+            height: 160px;
         }
 
 
@@ -96,6 +100,20 @@
             background-color: #1f1f1f;
 
         }
+        
+        .modal-dialog {
+    position: relative;
+    width: auto;
+                margin: 0px;
+   
+    pointer-events: none;
+}
+        
+        .modal-body {
+    position: relative;
+    flex: 1 1 auto;
+        padding: 1rem 2rem 1rem 2rem;
+}
 
         .modal-header {
 
@@ -132,6 +150,15 @@
             border-radius: 20px;
 
         }
+        
+        
+        .cropper-wrap-box, .cropper-canvas, .cropper-drag-box, .cropper-crop-box, .cropper-modal {
+    border-radius: 20px;
+}
+        .cropper-container {
+
+    border-radius: 20px;
+}
 
 
     </style>
@@ -145,11 +172,43 @@
 </head>
 
 <body>
+    
+    
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-storage.js"></script>
+
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+
+<script>
+
+  var firebaseConfig = {
+        apiKey: "AIzaSyCLEyAd_4-2n2ID0xTjwS1ouip9G9C6JDs",
+        authDomain: "blacknight-600de.firebaseapp.com",
+        databaseURL: "https://blacknight-600de.firebaseio.com",
+        projectId: "blacknight-600de",
+        storageBucket: "blacknight-600de.appspot.com",
+        messagingSenderId: "588926432348",
+        appId: "1:588926432348:web:47b2b4a1b421d4b2a0e299",
+        measurementId: "G-559VYPVJ5Q"
+
+    };
+
+    // Initialize Firebase
+
+    firebase.initializeApp(firebaseConfig);
+
+</script>
+    
+    
+    
+    
     <div class="container text-center ">
         <h1 id="mApelido" class="display-4">Escolha uma foto</h1>
 
         <label class="label" data-toggle="tooltip" title="" data-original-title="Escolha sua foto">
-            <img class="rounded" id="avatar" src="https://firebasestorage.googleapis.com/v0/b/blacknight-600de.appspot.com/o/promo%2Fcamera2.jpeg?alt=media&token=99e4d7b1-dc5e-47b9-958b-e53addc1784b" alt="avatar">
+            <img class="rounded" id="avatar" src="https://firebasestorage.googleapis.com/v0/b/inovabarapp.appspot.com/o/promo%2Fcamera2.jpeg?alt=media&token=cab19dad-ab65-4b83-ba69-8cd97513237c" alt="avatar">
             <input type="file" class="sr-only" id="input" name="image" accept="image/*">
         </label>
         <div class="progress">
@@ -158,7 +217,7 @@
         </div>
         <div class="alert" role="alert"></div>
         <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
+            <div class="modal-dialog " role="document">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="modalLabel">Preencha seus dados</h5>
@@ -221,7 +280,7 @@
         </div>
     </div>
 
-    <div id="container" class="container text-left">
+  <div id="container" class="container text-left">
         <div class="wrapper">
             <div class="inner">
                 <h4 id="text04">Olha o que vc ganha</h4>
@@ -266,6 +325,8 @@
         const { search } = window.location
 const params = new URLSearchParams(search)
 const pegaA = params.get('a')
+
+var parentURL = window != window.parent ? document.referrer : null;
 
 
         $(document).ready(function () {
@@ -381,10 +442,14 @@ const pegaA = params.get('a')
                                         var data = document.getElementById('data').value
                                         var whats = document.getElementById('whats').value
 
+                                        var promo1 = "Com 15 convidados pagantes até 2H o aniversariante ganha 1 garrafa de Vodka Smirnoff ou Gin Nacional"
+                                       
+
                                         firebase.database()
                                             .ref(`festas/${pegaA}/bday/${snap.key}`)
                                             .set(
 
+                                                
                                                 {
                                                     foto: url,
                                                     aprovado: false,
@@ -393,12 +458,12 @@ const pegaA = params.get('a')
                                                     data: data,
                                                     whats: whats,
                                                     status: 'Aniversariante',
-                                                    regra: 'Com 15 convidados pagantes até 2H o aniversariante ganha 1 garrafa de Vodka Smirnoff ou Gin Nacional'
+                                                    regra: promo1
 
                                                 }
                                             )
-
-                                         window.open(`${parentURL}?p=festas/${pegaA}/bday/${snap.key}`, '_top')
+                                        
+                                        window.open(`${parentURL}?p=festas/${pegaA}/bday/${snap.key}`, '_top')
 
                                     })
 
@@ -412,6 +477,8 @@ const pegaA = params.get('a')
 
                             .then(() => {
                                 console.log('Foi Gravado')
+                            
+                            
 
                                 document.getElementById('mApelido').innerHTML = apelido.value
 
@@ -444,39 +511,12 @@ const pegaA = params.get('a')
 
     </script>
 
-    <script>
-
-
-    </script>
+  
 
 
 </body>
 
-<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
 
-<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
-<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-storage.js"></script>
-
-<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
-
-<script>
-
-    var firebaseConfig = {
-        apiKey: "AIzaSyCLEyAd_4-2n2ID0xTjwS1ouip9G9C6JDs",
-        authDomain: "blacknight-600de.firebaseapp.com",
-        databaseURL: "https://blacknight-600de.firebaseio.com",
-        projectId: "blacknight-600de",
-        storageBucket: "blacknight-600de.appspot.com",
-        messagingSenderId: "588926432348",
-        appId: "1:588926432348:web:47b2b4a1b421d4b2a0e299",
-        measurementId: "G-559VYPVJ5Q"
-
-    };
-
-    // Initialize Firebase
-
-    firebase.initializeApp(firebaseConfig);
-
-</script>
 
 </html>
+
