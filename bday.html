@@ -242,7 +242,8 @@
     </style>
 
 
-    <p id="contaPromoter"></p>
+
+    <p id="contaBday">Aguardando aniversariantes...</p>
     <ul id="mostraRegras"></ul>
 
     <div id="lista"></div>
@@ -272,7 +273,7 @@ const pegaA = params.get('a')
         var mostraRegras = document.getElementById('mostraRegras')
 
         var dadosMostraRegras = ""
-
+var parentURL = window != window.parent ? document.referrer : null;
 
 firebase.database().ref(`festas/${pegaA}/bday`)
             .orderByChild('apelido')
@@ -283,15 +284,16 @@ firebase.database().ref(`festas/${pegaA}/bday`)
 
                 var resultado = snapshot.val()
                 var chave = snapshot.key
+                var zero = snapshot.numChildren()
 
                 let aprovado = ""
 
                 if (resultado.aprovado == true) {
-                    aprovado = ""
+                    aprovado = "⭕"
                     
 
                 } else {
-                    aprovado = "⭕"
+                    aprovado = ""
                     
                 }
 
@@ -300,7 +302,7 @@ firebase.database().ref(`festas/${pegaA}/bday`)
 
 
 
-dadosMostraRegras = ` 
+                                dadosMostraRegras = ` 
                 
         <li class="mostraRegras"><a href="${parentURL}?p=festas/${pegaA}/bday/${chave}"  target="_top"><div class="divFoto"><img src= ${resultado.foto} class="foto" ></a></div> <div class="conteudo"> <p class="pApelido"><b>  ${resultado.apelido} </b>${aprovado}</p> <p class="pNome"> ${resultado.status} </p>  </div>
             <div class="url"><a href="${parentURL}?p=festas/${pegaA}/bday/${chave}"  target="_top" class="pBtn"><i class="material-icons">
@@ -323,7 +325,6 @@ how_to_reg
                                 window.document.getElementById("contaBday").innerHTML = `Essa festa tem ${count} Aniversariantes`;
      
 
-                             
 
 
                             })
